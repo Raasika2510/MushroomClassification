@@ -2,6 +2,7 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
+import sklearn
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import LabelEncoder,OneHotEncoder
@@ -17,7 +18,7 @@ def main():
     st.sidebar.title("App Sidebar")
     st.sidebar.markdown("Let's start")
 
-    @st.cache(persist=True)
+    @st.cache_data(persist=True)
     def load():  # Data Loading
         data = pd.read_csv("mushrooms.csv")
         label = LabelEncoder()  # you do with OneHotEncoder
@@ -30,7 +31,7 @@ def main():
         st.subheader("Data is displayed")
         st.write(df)
 
-    @st.cache(persist=True)
+    @st.cache_data(persist=True)
     def split(df):
         y = df['class']
         x = df.drop(columns=['class'])
